@@ -1,34 +1,55 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, {useContext, useEffect,}  from "react";
+import { object } from "prop-types";
+import { Context } from "../store/appContext";
+import { Link,  } from "react-router-dom";
 
 export const ListContact =()=>{
+
+  const {store, actions} = useContext(Context);
+ 
+  const handleEliminate = (id) => {
+    actions.DeleteContact(id)
+    .then(() => actions.Contacts());
+  };
+  
+    const handleEdit = (idtwo) => {
+     actions.EditContact(idtwo)
+  };
+  
+
+  useEffect ( ()=> {
+    actions.Contacts()
+    console.log(store)
+  }, [])
     return(
 <>
- <h2>funciono</h2>
-
- <div className="container mt-4">
-    <h1 className="text-center">Contact List</h1>
-    <ul className="list-group">
-      <li className="list-group-item">
+{store.contactos && store.contactos.map((contact, index) => (
+      <li key={index} className="list-group-item">
         <div className="row align-items-center">
           <div className="col-3">
             <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="User" className="img-fluid rounded-circle"/>
           </div>
           <div className="col-6">
-            <h5>John Doe</h5>
-            <p>johndoe@example.com</p>
-            <p>(123) 456-7890</p>
-            <p>123 Main St, Anytown, USA</p>
+            <h5>{contact.name}</h5>
+            <p>{contact.email}</p>
+            <p>{contact.phone}</p>
+            <p>{contact.address}</p>
           </div>
           <div className="col-3 text-right">
-            <button type="button" className="btn btn-danger float-end"><i className="fas fa-trash-alt"></i></button>
-            <button type="button" className="btn btn-primary  float-end"><i className="fas fa-pencil-alt"></i></button>
-            
+            <button onClick={() => handleEliminate(contact.id)} 
+              type="button" 
+              className="btn btn-danger float-end">
+              <i className="fas fa-trash-alt"></i>
+            </button>
+            <Link to={`/EditContact/${contact.id}`}>
+              <button className="btn btn-primary float-end">
+                  <i className="fas fa-pencil-alt"></i>
+              </button>   
+            </Link>
           </div>
         </div>
-      </li>
-    </ul>
-  </div>
+      </li>        
+    ))}
 </>
        
         
