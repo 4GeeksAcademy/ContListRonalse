@@ -13,9 +13,12 @@ export const Contacts = () => {
             </ul>
         
         </div>
-        <Link to="/AddContact">
-					<button className="  btn btn-success justify-content-center">Add new contact</button>
-		</Link>
+        <div className="d-flex justify-content-center mt-4">
+            <Link to="/AddContact">
+				<button className="  btn btn-success justify-content-center">Add new contact</button>
+		    </Link>
+        </div>
+
 </div>
     )
 }

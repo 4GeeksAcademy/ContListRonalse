@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Link, useParams  } from "react-router-dom";
+import { Link, useParams, useNavigate  } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 
@@ -13,15 +13,19 @@ export const EditContact =() => {
             telefonodos: "",
             direcciondos: ""
         });
+
+    const navigate = useNavigate();
+    
         const handleSubmit = (e) => {
             e.preventDefault();
-            actions.EditContact(id, userInputTwo); // Llamar a la función EditContact con el ID y los datos del formulario
+           if (actions.EditContact(id, userInputTwo)) navigate("/") // Llamar a la función EditContact con el ID y los datos del formulario
+        
         };
     return (
 <>
 <form onSubmit={e => handleSubmit(e)}>
     <div className="container mt-5">
-    <div className="mt-5">
+        <div className="mt-5">
         
             <label className="form-label d-flex text-start">
             <i className="fa fa-user bigicon mx-2" style={{color: "#B197FC",fontSize : 24}}></i>  
@@ -73,13 +77,16 @@ export const EditContact =() => {
             value={userInputTwo.direcciondos} 
             onChange={(e) => setUserInputTwo({ ...userInputTwo, direcciondos: e.target.value })}
             placeholder="Address" />
+        </div>
+        <div className="d-flex justify-content-center ">
+            <input type="submit" value={"Edit Contact"} className="btn btn-primary mx-3"></input>
+            <Link to="/">
+                <button className="btn btn-primary mx-3">Back home</button>
+            </Link>
+        </div>
     </div>
-    </div>
-            <input type="submit" value={"savedos"} className="btn btn-primary"></input>
+           
 </form>
-<Link to="/">
-    <button className="btn btn-primary">Back home</button>
-</Link>
 </>      
 
     )

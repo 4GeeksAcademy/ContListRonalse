@@ -1,17 +1,20 @@
-import React, { useContext, useState, useEffect } from "react";
-import { Link,  } from "react-router-dom";
+import React, { useContext, useState, } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 
 
 export const AddContact =() => {
-        const {store, actions} = useContext(Context);
+    const {store, actions} = useContext(Context);
     const [userInput, setUserInput] = useState([]);
+
+    const navigate = useNavigate();
+
 
     const handleSubmit = e => {
         e.preventDefault();
-            actions.CreateContact(userInput);
-            console.log(userInput)
+           actions.CreateContact(userInput);
+            navigate("/")
     };
     return (
 <>
@@ -71,11 +74,14 @@ export const AddContact =() => {
             placeholder="Address" />
     </div>
     </div>
-            <input type="submit" value={"save"} className="btn btn-primary"></input>
+    <div className="d-flex justify-content-center ">
+            <input type="submit" value={"Add Contact"} className="btn btn-primary mx-3"></input>
+            <Link to="/">
+                <button className="btn btn-primary mx-3">Back home</button>
+            </Link>
+    </div>
 </form>
-<Link to="/">
-    <button className="btn btn-primary">Back home</button>
-</Link>
+
 </>      
 
     )

@@ -25,14 +25,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 				  redirect: "follow"
 				};
 				
-				fetch("https://playground.4geeks.com/contact/agendas/Ronalse/contacts", requestOptions)
+				fetch("https://playground.4geeks.com/contact/agendas/ronalse/contacts", requestOptions)
 				  .then((response) => response.json())
 				  .then((result) => console.log(result.contacts))
 				  .catch((error) => console.error(error));
 			},
 
-			Contacts: () => {  
-						fetch("https://playground.4geeks.com/contact/agendas/Ronalse/contacts" ,{
+			Contacts: async () => {  
+					try {
+													fetch("https://playground.4geeks.com/contact/agendas/ronalse/contacts" ,{
 							method : "GET"
 						})
 						.then((response) => response.json())
@@ -42,6 +43,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}
 						)
 						.catch((error) => console.error(error));
+					} catch (error) {
+						const myHeaders = new Headers();
+						myHeaders.append("Content-Type", "application/json");
+						const requestOptions = {
+						  method: "POST",
+						  headers: myHeaders,
+						  redirect: "follow"
+						};
+						
+						fetch("https://playground.4geeks.com/contact/agendas/ronalse", requestOptions)
+						  .then((response) => response.json())
+						  .then((result) => {
+							setStore({contactos: result.contacts });
+							console.log(result)
+						})
+						  .catch((error) => console.error(error));
+					}
+
 			},
 
 			DeleteContact: async (id) => {
@@ -59,7 +78,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     redirect: "follow"
                 };
 
-                return fetch(`https://playground.4geeks.com/contact/agendas/Ronalse/contacts/${id}`, requestOptions)
+                return fetch(`https://playground.4geeks.com/contact/agendas/ronalse/contacts/${id}`, requestOptions)
 				.then(response => {
 					if (!response.ok) {console.log("error")}
 					return console.log(response);})
@@ -87,13 +106,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 					body: raw,
 					redirect: "follow"
 					};
-
-					fetch(`https://playground.4geeks.com/contact/agendas/Ronalse/contacts/${idtwo}`, requestOptions)
-					.then(response => {
-						if (!response.ok) {console.log("error")}
-						return console.log(response);})
-					.then((result) => console.log(result))
-					.catch((error) => console.error(error));
+					
+					try {
+						const resp = await fetch(`https://playground.4geeks.com/contact/agendas/ronalse/contacts/${idtwo}`, requestOptions)
+						const data = await resp.json();
+						console.log(data);
+						return true;
+					} catch (error) {
+						console.log("error not found")
+						return false
+					}
 			},
 
 

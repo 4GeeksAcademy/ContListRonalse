@@ -12,9 +12,7 @@ export const ListContact =()=>{
     .then(() => actions.Contacts());
   };
   
-    const handleEdit = (idtwo) => {
-     actions.EditContact(idtwo)
-  };
+ 
   
 
   useEffect ( ()=> {
