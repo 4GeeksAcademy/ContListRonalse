@@ -1,8 +1,27 @@
-import React from "react";
+import React, {useContext, useState} from "react";
 import { ListContact } from "../component/ListContact";
 import { Link } from "react-router-dom";
-export const Contacts = () => {
+import { Context } from "../store/appContext";
 
+
+export const Contacts = () => {
+    const {store, actions} = useContext(Context);
+    const [agendaCreated, setAgendaCreated] = useState(false);
+    
+    const handleCreateAgenda = async (e) => {
+        e.preventDefault();
+        if (!agendaCreated) {
+            const isCreated = await actions.CreateAgenda();
+            if (isCreated) {
+                setAgendaCreated(true);
+                alert("Agenda creada");
+            } else {
+                alert("¡La agenda ya existe!");
+            }
+        } else {
+            alert("¡La agenda ya está creada!");
+        }
+    };
     
     return (
 <div className="container mt-5">
@@ -17,6 +36,7 @@ export const Contacts = () => {
             <Link to="/AddContact">
 				<button className="  btn btn-success justify-content-center">Add new contact</button>
 		    </Link>
+                <button onClick={handleCreateAgenda}>Crear Agenda</button>
         </div>
 
 </div>

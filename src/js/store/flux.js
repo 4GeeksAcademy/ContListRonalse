@@ -31,9 +31,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				  .catch((error) => console.error(error));
 			},
 
-			Contacts: async () => {  
-					try {
-													fetch("https://playground.4geeks.com/contact/agendas/ronalse/contacts" ,{
+			Contacts: async() => {  
+						fetch("https://playground.4geeks.com/contact/agendas/ronalse/contacts" ,{
 							method : "GET"
 						})
 						.then((response) => response.json())
@@ -43,24 +42,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}
 						)
 						.catch((error) => console.error(error));
-					} catch (error) {
-						const myHeaders = new Headers();
-						myHeaders.append("Content-Type", "application/json");
-						const requestOptions = {
-						  method: "POST",
-						  headers: myHeaders,
-						  redirect: "follow"
-						};
-						
-						fetch("https://playground.4geeks.com/contact/agendas/ronalse", requestOptions)
-						  .then((response) => response.json())
-						  .then((result) => {
-							setStore({contactos: result.contacts });
-							console.log(result)
-						})
-						  .catch((error) => console.error(error));
-					}
-
 			},
 
 			DeleteContact: async (id) => {
@@ -116,6 +97,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log("error not found")
 						return false
 					}
+			},
+
+			CreateAgenda : async () =>{
+				
+				const requestOptions = {
+				  method: "POST",
+				  redirect: "follow"
+				};
+				
+				try {
+					const resp = await fetch(`https://playground.4geeks.com/contact/agendas/ronalse`, requestOptions)
+					const data = await resp.json()
+					console.log(data)
+					return true
+				} catch (error) {
+					return false
+				}
 			},
 
 
