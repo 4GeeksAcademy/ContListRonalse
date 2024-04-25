@@ -8,10 +8,10 @@ export const Contacts = () => {
     const {store, actions} = useContext(Context);
     const [agendaCreated, setAgendaCreated] = useState(false);
     
-    const handleCreateAgenda = async (e) => {
+    const handleCreateAgenda =  (e) => {
         e.preventDefault();
         if (!agendaCreated) {
-            const isCreated = await actions.CreateAgenda();
+            const isCreated = actions.CreateAgenda();
             if (isCreated) {
                 setAgendaCreated(true);
                 alert("Agenda creada");
