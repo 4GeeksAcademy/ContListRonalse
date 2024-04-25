@@ -36,7 +36,7 @@ export const Contacts = () => {
             <Link to="/AddContact">
 				<button className="  btn btn-success justify-content-center">Add new contact</button>
 		    </Link>
-                <button onClick={handleCreateAgenda}>Crear Agenda</button>
+                <button onClick={handleCreateAgenda} className="btn btn-warning mx-3">Crear Agenda</button>
         </div>
 
 </div>
