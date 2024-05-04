@@ -12,7 +12,7 @@ import { Footer } from "./component/footer";
 import { AddContact } from "/workspaces/ContListRonalse/src/js/views/AddContact.jsx";
 import { Contacts } from "./views/Contacts.jsx";
 import { EditContact } from "./views/EditContact.jsx";
-
+import { Profile } from "./views/Profile.jsx";
 //import { UserContextProvider } from "./context/Users/UserContext.js";
 //create your first component
 const Layout = () => {
@@ -29,6 +29,7 @@ const Layout = () => {
 						<Route path="/" element={<Contacts />} />
 						<Route path="/AddContact" element={<AddContact />} />
 						<Route path="/EditContact/:id" element={<EditContact />} />
+						<Route path="/Profile/:id" element={<Profile />} />
 						<Route path="/single/:theid" element={<Single />} />
 						<Route path="*" element={<h1>Not found!</h1>} />
 					</Routes>

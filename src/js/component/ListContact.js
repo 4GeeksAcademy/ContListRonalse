@@ -23,7 +23,9 @@ export const ListContact =()=>{
       <li key={index} className="list-group-item ">
         <div className="row align-items-center">
           <div className="col-3">
-            <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="User" className="img-fluid rounded-circle"/>
+            <Link to={`/Profile/${contact.id}`}>
+              <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="User" className="img-fluid rounded-circle"/>
+            </Link>
           </div>
           <div className="col-6 overflow-hidden">
             <h5>{contact.name}</h5>
