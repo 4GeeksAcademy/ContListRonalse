@@ -6,7 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 		actions: {
 			// Use getActions to call a function within a fuction
-			CreateContact:  ({nombre, direccion, telefono, correo}) => {
+			CreateContact: async ({nombre, direccion, telefono, correo}) => {
 				//fetch POST
 				const myHeaders = new Headers();
 				myHeaders.append("Content-Type", "application/json");
@@ -27,7 +27,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				
 				fetch("https://playground.4geeks.com/contact/agendas/ronalse/contacts", requestOptions)
 				  .then((response) => response.json())
-				  .then((result) => console.log(result.contacts))
+				  .then((result) => {console.log(result.contacts)})
 				  .catch((error) => console.error(error));
 			},
 
@@ -35,7 +35,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 						fetch("https://playground.4geeks.com/contact/agendas/ronalse/contacts" ,{
 							method : "GET"
 						})
-						.then((response) => response.json())
+						.then((response) =>{
+							if (response.status >= 200 && response.status <= 299){
+								return response.json()
+							} else if (response.status >= 400 && response.status <= 499) {
+								const requestOptions = {
+								  method: "POST",
+								};
+								
+								fetch("https://playground.4geeks.com/contact/agendas/ronalse", requestOptions)
+								  .then((response) => response.json())
+								  .then((result) => console.log(result))
+								  .catch((error) => console.error(error));
+								  return response.json()
+							} 
+							 })
 						.then((result) => {
 							setStore({contactos: result.contacts });
 							console.log(result)
@@ -98,24 +112,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return false
 					}
 			},
-
-			CreateAgenda : async () =>{
-				
-				const requestOptions = {
-				  method: "POST",
-				  redirect: "follow"
-				};
-				
-				try {
-					const resp = await fetch(`https://playground.4geeks.com/contact/agendas/ronalse`, requestOptions)
-					const data = await resp.json()
-					console.log(data)
-					return true
-				} catch (error) {
-					return false
-				}
-			},
-
 
 			changeColor: (index, color) => {
 				//get the store

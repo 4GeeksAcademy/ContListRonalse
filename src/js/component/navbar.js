@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 export const Navbar = () => {
 	return (
-		<nav className="navbar navbar-light bg-light mb-3">
+		<nav className="navbar      navbar-light bg-dark  navbars">
 			<Link to="/">
-				<span className="navbar-brand mb-0 h1">React Boilerplate</span>
+				<p className="navbar-brand mb-0 h1 text-light text-decoration-none "  ><i className="far fa-address-book mx-2" style={{color: "#B197FC", fontSize : 24}}></i>Contact List</p>
 			</Link>
 			<div className="ml-auto">
 				<Link to="/AddContact">

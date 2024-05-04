@@ -5,7 +5,7 @@ import { Context } from "../store/appContext";
 
 
 export const EditContact =() => {
-        const { id } = useParams();
+        const { id} = useParams();
         const {store, actions} = useContext(Context);
         const [userInputTwo, setUserInputTwo] = useState({
             nombredos: "",
@@ -18,13 +18,29 @@ export const EditContact =() => {
     
         const handleSubmit = (e) => {
             e.preventDefault();
-           if (actions.EditContact(id, userInputTwo)) navigate("/") // Llamar a la función EditContact con el ID y los datos del formulario
+           if (actions.EditContact(id, userInputTwo)) {
+            navigate("/") // Llamar a la función EditContact con el ID y los datos del formulario
+            actions.Contacts();
+           }
+          };  
+          
+    useEffect(() => {
+        const contact = store.contactos.find(contact => contact.id === parseInt(id));  //// Busco el contacto en la tienda por la id
+            if (contact) { // Verifico si se encontro el contacto
+                setUserInputTwo({  // Si se encuentra actualizar el estado con los datos del contacto
+                    nombredos: contact.name,
+                    correodos: contact.email,
+                    telefonodos: contact.phone,
+                    direcciondos: contact.address
+                });
+            }
+        }, [id, store.contactos]);
         
-        };
+       
     return (
 <>
 <form onSubmit={e => handleSubmit(e)}>
-    <div className="container mt-5">
+    <div className="container mt-5 editcontact">
         <div className="mt-5">
         
             <label className="form-label d-flex text-start">

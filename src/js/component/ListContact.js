@@ -12,22 +12,20 @@ export const ListContact =()=>{
     .then(() => actions.Contacts());
   };
   
- 
-  
-
   useEffect ( ()=> {
     actions.Contacts()
     console.log(store)
   }, [])
+
     return(
 <>
 {store.contactos && store.contactos.map((contact, index) => (
-      <li key={index} className="list-group-item">
+      <li key={index} className="list-group-item ">
         <div className="row align-items-center">
           <div className="col-3">
             <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="User" className="img-fluid rounded-circle"/>
           </div>
-          <div className="col-6">
+          <div className="col-6 overflow-hidden">
             <h5>{contact.name}</h5>
             <p>{contact.email}</p>
             <p>{contact.phone}</p>

@@ -8,7 +8,7 @@ export const Contacts = () => {
     const {store, actions} = useContext(Context);
     const [agendaCreated, setAgendaCreated] = useState(false);
     
-    const handleCreateAgenda =  (e) => {
+    /*const handleCreateAgenda =  (e) => {
         e.preventDefault();
         if (!agendaCreated) {
             const isCreated = actions.CreateAgenda();
@@ -21,24 +21,16 @@ export const Contacts = () => {
         } else {
             alert("¡La agenda ya está creada!");
         }
-    };
+        //<button onClick={handleCreateAgenda} className="btn btn-warning mx-3">Crear Agenda</button>
+    };*/
     
     return (
-<div className="container mt-5">
-        <div className="container mt-4">
-            <h1 className="text-center">Contact List</h1>
-            <ul className="list-group">
+
+        <div className="container mt-5 contactos">
+            <ul className="list-group mb-5 ">
                 <ListContact/>
             </ul>
-        
-        </div>
-        <div className="d-flex justify-content-center mt-4">
-            <Link to="/AddContact">
-				<button className="  btn btn-success justify-content-center">Add new contact</button>
-		    </Link>
-                <button onClick={handleCreateAgenda} className="btn btn-warning mx-3">Crear Agenda</button>
         </div>
 
-</div>
     )
 }

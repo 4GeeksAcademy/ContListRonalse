@@ -14,12 +14,13 @@ export const AddContact =() => {
     const handleSubmit = e => {
         e.preventDefault();
            actions.CreateContact(userInput);
+           actions.Contacts();
             navigate("/")
     };
     return (
 <>
 <form onSubmit={e => handleSubmit(e)}>
-    <div className="container mt-5">
+    <div className="container mt-5 addcontact">
     <div className="mt-5">
         
             <label className="form-label d-flex text-start">

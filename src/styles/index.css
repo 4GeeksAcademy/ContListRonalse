@@ -5,3 +5,36 @@ body {
 
     background-color: floralwhite;
 }
+
+.navbars {
+    position: fixed; /* Fija la barra de navegación */
+    top: 0; /* La fija en la parte superior */
+    width: 100%; /* Ocupa todo el ancho */
+     /* Color de fondo */
+    padding: 20px 0; /* Espaciado interno */
+    z-index: 1000; /* Asegura que esté por encima de otros elementos */
+
+}
+
+.footer {
+    position: fixed; /* Fija el footer */
+    bottom: 0; /* Lo coloca al final de la ventana del navegador */
+    width: 100%; /* Ocupa todo el ancho */
+    /* Color de fondo */
+    padding: 15px 0; /* Espaciado interno */
+    color: white; /* Color del texto */
+    text-align: center; /* Centra el contenido */
+    height: 45px;
+}
+
+.addcontact{
+margin-top: 200px !important;
+}
+
+.contactos {
+    margin-top: 150px !important;
+}
+
+.editcontact{
+    margin-top: 200px !important;
+    }
